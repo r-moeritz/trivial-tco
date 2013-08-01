@@ -12,7 +12,8 @@
      ,@body)
   #+ccl
   `(let ((saved-policy (ccl:current-compiler-policy))
-         (new-policy (ccl:new-compiler-policy :allow-tail-recursion-elimination (lambda () t))))
+         (new-policy (ccl:new-compiler-policy 
+                      :allow-tail-recursion-elimination (lambda () t))))
      (unwind-protect
           (progn
             (ccl:set-current-compiler-policy new-policy)
@@ -23,7 +24,8 @@
      (declare (optimize (debug 0)))
      ,@body)
   #+allegro
-  `(let ((compiler:tail-call-non-self-merge-switch t))
+  `(let ((compiler:tail-call-non-self-merge-switch t)
+         (compiler:tail-call-self-merge-switch t))
      ,@body)
   #-(or cmu sbcl ccl lispworks allegro)
   (let ((msg "Proper tail-call optimization is not available."))

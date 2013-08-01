@@ -13,15 +13,14 @@ git clone https://github.com/ralph-moeritz/trivial-tco
 ## Usage
 
 ```common-lisp
-(defun fib (n)
-  (labels ((fib-aux (n x y)
-             (if (zerop n)
-                 x
-                 (fib-aux (1- n) y (+ x y)))))
-    (fib-aux n 0 1)))
-
 (tco:with-tail-call-optimization ()
-  (fib 40))
+  (labels ((sum-aux (acc x)
+             (if (zerop x)
+                 acc
+                 (sum-aux (+ acc x) (- x 1))))
+           (sum (n)
+             (sum-aux 0 n)))
+    (sum 1000000)))
 ```
 
 ## Status
