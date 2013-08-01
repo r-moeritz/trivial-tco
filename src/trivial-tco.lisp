@@ -10,14 +10,14 @@
   `(progn
      (declare (optimize (speed 3)))
      ,@body)
-  #+ccl
-  `(let ((saved-policy (ccl:current-compiler-policy))
-         (new-policy (ccl:new-compiler-policy :allow-tail-recursion-elimination (lambda () t))))
-     (unwind-protect
-          (progn
-            (ccl:set-current-compiler-policy new-policy)
-            ,@body)
-       (ccl:set-current-compiler-policy saved-policy)))
+  ;; #+ccl
+  ;; `(let ((saved-policy (ccl:current-compiler-policy))
+  ;;        (new-policy (ccl:new-compiler-policy :allow-tail-recursion-elimination (lambda () t))))
+  ;;    (unwind-protect
+  ;;         (progn
+  ;;           (ccl:set-current-compiler-policy new-policy)
+  ;;           ,@body)
+  ;;      (ccl:set-current-compiler-policy saved-policy)))
   #+lispworks
   `(progn
      (declare (optimize (debug 0)))
@@ -29,8 +29,13 @@
             (setf compiler:tail-call-non-self-merge-switch t)
             ,@body)
        (setf compiler:tail-call-non-self-merge-switch saved-value)))
-  #-(or cmu sbcl ccl lispworks allegro)
-  (if treat-warnings-as-errors
-      (error "Proper tail-call optimization is not available.")
-      (warn "Proper tail-call optimization is not available.")))
+  #-(or cmu sbcl lispworks allegro)
+  (let ((msg "Proper tail-call optimization is not available."))
+    (if treat-warnings-as-errors
+        (error msg)
+        (progn 
+          (warn msg)
+          `(progn
+             ,@body)))))
+
 

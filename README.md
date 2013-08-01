@@ -1,7 +1,7 @@
 # trivial-tco
 
-A library to assist in ensuring certain code is executed with tail call
-optimizations enabled.
+A Common Lisp library to assist in ensuring certain code is executed with tail
+call optimizations enabled.
 
 ## Installation
 
@@ -31,7 +31,7 @@ Barely tested.
 ## Bugs
 
 I'm not aware of any bugs, but if you believe you've found one, please do
-[report it](https://github.com/ralph-moeritz/bt-semaphore/issues).
+[report it](https://github.com/ralph-moeritz/trivial-tco/issues).
 
 ## Author
 
