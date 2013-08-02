@@ -24,10 +24,16 @@
      (declare (optimize (debug 0)))
      ,@body)
   #+allegro
-  (let ((compiler:tail-call-non-self-merge-switch t)
-        (compiler:tail-call-self-merge-switch t))
-    `(progn
-       ,@body))
+  (let ((non-self compiler:tail-call-non-self-merge-switch)
+        (self compiler:tail-call-self-merge-switch))
+    (setf compiler:tail-call-non-self-merge-switch t)
+    (setf compiler:tail-call-self-merge-switch t)
+    `(unwind-protect
+          (progn 
+            ,@body)
+       (progn
+         (setf compiler:tail-call-non-self-merge-switch ,non-self)
+         (setf compiler:tail-call-self-merge-switch ,self))))
   #-(or cmu sbcl ccl lispworks allegro)
   (let ((msg "Proper tail-call optimization is not available."))
     (if treat-warnings-as-errors
