@@ -13,6 +13,8 @@ git clone https://github.com/ralph-moeritz/trivial-tco
 ## Usage
 
 ```common-lisp
+(ql:quickload :trivial-tco)
+
 (tco:with-tail-call-optimization ()
   (labels ((sum-aux (acc x)
              (if (zerop x)
@@ -25,11 +27,13 @@ git clone https://github.com/ralph-moeritz/trivial-tco
 
 ## Status
 
-Barely tested.
+There is a small test suite that can be executed via `(ql:quickload
+:trivial-tco-test)` or `(asdf:test-system :trivial-tco)`. I've only run it on
+[CCL](http://ccl.clozure.com).
 
 ## Bugs
 
-I'm not aware of any bugs, but if you believe you've found one, please do
+If you believe you've found a bug, please do
 [report it](https://github.com/ralph-moeritz/trivial-tco/issues).
 
 ## Author
