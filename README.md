@@ -7,7 +7,7 @@ call optimizations enabled.
 
 ```
 cd ~/quicklisp/local-projects
-git clone https://github.com/ralph-moeritz/trivial-tco
+git clone https://github.com/rmoritz/trivial-tco
 ```
 
 ## Usage
@@ -34,11 +34,11 @@ There is a small test suite that can be executed via `(ql:quickload
 ## Bugs
 
 If you believe you've found a bug, please do
-[report it](https://github.com/ralph-moeritz/trivial-tco/issues).
+[report it](https://github.com/rmoritz/trivial-tco/issues).
 
 ## Author
 
-* Ralph Möritz (ralph.moeritz@outlook.com)
+* Ralph Möritz (ralphmoritz@outlook.com)
 
 ## License
 
